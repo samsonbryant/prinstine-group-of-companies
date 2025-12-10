@@ -137,21 +137,21 @@ The backend runs with Node.js directly. For production, consider using PM2 or si
 
 ## Deployment
 
-This project is configured for deployment on Render.
+This project is configured for deployment on Render as a **Static Site**.
 
 ### Quick Deploy
 
 See **[RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)** for detailed step-by-step instructions.
 
 **Quick Summary:**
-1. Deploy **Backend** as a **Web Service** (Root: `backend`, Build: `npm ci`, Start: `npm start`)
-2. Deploy **Frontend** as a **Static Site** (Root: `prinstine-website`, Build: `npm ci && npm run build`, Publish: `prinstine-website/dist`)
-3. Set `VITE_API_BASE` environment variable in frontend to your backend URL
-4. Configure custom domain `prinstinegroup.org` in Render
+1. Deploy **Frontend** as a **Static Site** on Render
+   - Root Directory: `prinstine-website`
+   - Build Command: `npm ci && npm run build`
+   - Publish Directory: `prinstine-website/dist`
+2. Configure custom domain `prinstinegroup.org` in Render
+3. Add DNS records in Namecheap as provided by Render
 
-### Render Blueprint
-
-You can use the included `render.yaml` file for automated deployment, or configure manually using the guide above.
+**Note:** Static sites must be configured manually in Render dashboard (Blueprints don't support static sites).
 
 ## License
 

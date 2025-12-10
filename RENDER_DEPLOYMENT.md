@@ -8,29 +8,23 @@ This guide will help you deploy the Prinstine Group website as a **Static Site**
 - Your domain `prinstinegroup.org` configured in Namecheap
 - GitHub repository connected to Render
 
-## Quick Deploy (Static Site Only)
+## Important Note
 
-### Option 1: Using Render Blueprint (Recommended)
+⚠️ **Render Blueprints do not support Static Sites**. Static sites must be configured manually through the Render dashboard. This is a one-time setup that takes just a few minutes.
 
-1. Go to your Render dashboard
-2. Click **"New +"** → **"Blueprint"**
-3. Connect your GitHub repository: `samsonbryant/prinstine-group-of-companies`
-4. Render will detect the `render.yaml` file and configure automatically
-5. Click **"Apply"** to deploy
-6. Wait for deployment to complete
+## Deploy Static Site (Manual Setup)
 
-### Option 2: Manual Static Site Setup
-
-1. Go to your Render dashboard
+1. Go to your Render dashboard: https://dashboard.render.com
 2. Click **"New +"** → **"Static Site"**
 3. Connect your GitHub repository: `samsonbryant/prinstine-group-of-companies`
-4. Configure the service:
-   - **Name**: `prinstine-frontend`
-   - **Root Directory**: `prinstine-website`
-   - **Build Command**: `npm ci && npm run build`
-   - **Publish Directory**: `prinstine-website/dist`
-5. Click **"Create Static Site"**
-6. Wait for deployment to complete
+4. Configure the service with these **exact** settings:
+   - **Name**: `prinstine-frontend` (or any name you prefer)
+   - **Root Directory**: `prinstine-website` ⚠️ **Important: Must be exactly this**
+   - **Build Command**: `npm ci && npm run build` ⚠️ **Important: Must be exactly this**
+   - **Publish Directory**: `prinstine-website/dist` ⚠️ **Important: Must be exactly this**
+5. **Environment Variables**: Leave empty (none needed for static site)
+6. Click **"Create Static Site"**
+7. Wait for deployment to complete (usually 2-5 minutes)
 
 ## Configure Custom Domain
 

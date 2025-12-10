@@ -1,7 +1,0 @@
-services:
-  # Frontend Static Site
-  - type: static
-    name: prinstine-frontend
-    buildCommand: npm ci && npm run build
-    publishPath: prinstine-website/dist
-    rootDir: prinstine-website
