@@ -20,8 +20,8 @@ function About() {
   const milestones = [
     { year: '2023', event: 'Prinstine Group of Companies Founded' },
     { year: '2023', event: 'Launch of Prinstine Consults' },
-    { year: '2023', event: 'Establishment of Prinstine Academy' },
-    { year: '2023', event: 'Inception of Prinstine Microfinance' },
+    { year: '2025', event: 'Establishment of Prinstine Academy' },
+    { year: '2026', event: 'Inception of Prinstine Microfinance' },
   ];
 
   return (
@@ -299,26 +299,43 @@ function About() {
         </div>
       </section>
 
-      {/* Vision */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl font-heading font-bold mb-6"
-          >
-            Our Vision
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-2xl max-w-3xl mx-auto"
-          >
-            Growth, Empowerment, and Productivity
-          </motion.p>
+      {/* Vision & Mission */}
+      <section className="py-20 bg-gradient-to-br from-primary via-blue-700 to-secondary text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Vision */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20"
+            >
+              <h2 className="text-4xl font-heading font-bold mb-6 flex items-center gap-3">
+                <div className="w-1 h-12 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-full"></div>
+                Our Vision
+              </h2>
+              <p className="text-lg leading-relaxed">
+                We envision to be one of the leading service providers Internationally; thereby ensuring that we maintain our core values through all spheres of influence in an effective and efficient manner.
+              </p>
+            </motion.div>
+
+            {/* Mission */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20"
+            >
+              <h2 className="text-4xl font-heading font-bold mb-6 flex items-center gap-3">
+                <div className="w-1 h-12 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-full"></div>
+                Our Mission
+              </h2>
+              <p className="text-lg leading-relaxed">
+                Prinstine Group exists to empower people economically, financially and academically, thereby ensuring that those who live in poverty, ignorant to basic knowledge and need consultancy services, are served in full.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
