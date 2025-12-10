@@ -145,9 +145,9 @@ See **[RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)** for detailed step-by-step
 
 **Quick Summary:**
 1. Deploy **Frontend** as a **Static Site** on Render
-   - Root Directory: `prinstine-website`
-   - Build Command: `npm install && npm run build`
-   - Publish Directory: `dist` (relative to root directory)
+   - Root Directory: `.` (or leave empty)
+   - Build Command: `cd prinstine-website && npm install && npm run build`
+   - Publish Directory: `prinstine-website/dist`
 2. Configure custom domain `prinstinegroup.org` in Render
 3. Add DNS records in Namecheap as provided by Render
 

@@ -19,9 +19,9 @@ This guide will help you deploy the Prinstine Group website as a **Static Site**
 3. Connect your GitHub repository: `samsonbryant/prinstine-group-of-companies`
 4. Configure the service with these **exact** settings:
    - **Name**: `prinstine-frontend` (or any name you prefer)
-   - **Root Directory**: `prinstine-website` ⚠️ **Important: Must be exactly this**
-   - **Build Command**: `npm install && npm run build` ⚠️ **Important: Use npm install (not npm ci)**
-   - **Publish Directory**: `dist` ⚠️ **Important: Relative to root directory, so just `dist` (not prinstine-website/dist)**
+   - **Root Directory**: `.` (repository root) or leave empty ⚠️ **Use this workaround**
+   - **Build Command**: `cd prinstine-website && npm install && npm run build` ⚠️ **Important: Use this exact command**
+   - **Publish Directory**: `prinstine-website/dist` ⚠️ **Important: Full path from repo root**
 5. **Environment Variables**: Leave empty (none needed for static site)
 6. Click **"Create Static Site"**
 7. Wait for deployment to complete (usually 2-5 minutes)
@@ -102,13 +102,15 @@ This means Render is not finding your `package.json` file. **Check these setting
 
 ## Quick Reference
 
-### Static Site Settings
+### Static Site Settings (WORKING CONFIGURATION)
 ```
 Type: Static Site
-Root Directory: prinstine-website
-Build Command: npm install && npm run build
-Publish Directory: dist
+Root Directory: . (or leave empty)
+Build Command: cd prinstine-website && npm install && npm run build
+Publish Directory: prinstine-website/dist
 ```
+
+**Why this works:** The `cd` command in the build command explicitly navigates to the correct directory, bypassing any Root Directory configuration issues.
 
 ### DNS Records (Namecheap)
 - **A Record** (`@`): Point to Render's provided IP addresses
