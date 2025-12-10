@@ -14,6 +14,16 @@ function CertificateVerification() {
     e.preventDefault();
     if (!certNumber.trim()) return;
 
+    // If no API, show contact message
+    if (!API_BASE) {
+      setVerificationResult({
+        status: 'info',
+        message: 'Certificate verification requires backend service. Please contact us at info@prinstinegroup.org or info@prinstineacademy.org for verification.'
+      });
+      setShowModal(true);
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE}/api/verify-certificate`, {
@@ -24,7 +34,7 @@ function CertificateVerification() {
     } catch (error) {
       setVerificationResult({
         status: 'error',
-        message: 'Failed to verify certificate. Please try again.'
+        message: 'Failed to verify certificate. Please contact us at info@prinstinegroup.org for assistance.'
       });
       setShowModal(true);
     } finally {
@@ -192,14 +202,14 @@ function CertificateVerification() {
                       </svg>
                     </motion.div>
                   )}
-                  {verificationResult.status === 'error' && (
+                  {(verificationResult.status === 'error' || verificationResult.status === 'info') && (
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                      className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4"
                     >
                       <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                       </svg>
                     </motion.div>
                   )}
@@ -208,6 +218,7 @@ function CertificateVerification() {
                     {verificationResult.status === 'invalid' && 'Certificate Not Found'}
                     {verificationResult.status === 'expired' && 'Certificate Expired'}
                     {verificationResult.status === 'error' && 'Verification Error'}
+                    {verificationResult.status === 'info' && 'Contact Us for Verification'}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
                     {verificationResult.message}

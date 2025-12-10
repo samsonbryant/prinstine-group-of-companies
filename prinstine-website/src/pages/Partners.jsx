@@ -17,6 +17,16 @@ function Partners() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // If no API base URL, use mailto fallback
+    if (!API_BASE) {
+      const mailtoLink = `mailto:info@prinstinegroup.org?subject=Partnership Inquiry from ${encodeURIComponent(formData.company)}&body=${encodeURIComponent(formData.message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.email)})`;
+      window.location.href = mailtoLink;
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', company: '', message: '' });
+      setTimeout(() => setSubmitStatus(null), 5000);
+      return;
+    }
+    
     try {
       // Submit as inquiry
       const response = await axios.post(`${API_BASE}/api/inquiries`, {
@@ -30,7 +40,11 @@ function Partners() {
         setTimeout(() => setSubmitStatus(null), 5000);
       }
     } catch (error) {
-      setSubmitStatus('error');
+      // Fallback to mailto if API fails
+      const mailtoLink = `mailto:info@prinstinegroup.org?subject=Partnership Inquiry from ${encodeURIComponent(formData.company)}&body=${encodeURIComponent(formData.message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.email)})`;
+      window.location.href = mailtoLink;
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', company: '', message: '' });
       setTimeout(() => setSubmitStatus(null), 5000);
     }
   };

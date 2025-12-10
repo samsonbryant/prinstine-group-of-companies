@@ -42,6 +42,16 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // If no API base URL, use mailto fallback
+    if (!API_BASE) {
+      const mailtoLink = `mailto:info@prinstinegroup.org?subject=Contact Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(formData.email)}`;
+      window.location.href = mailtoLink;
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitStatus(null), 5000);
+      return;
+    }
+    
     try {
       const response = await axios.post(`${API_BASE}/api/inquiries`, formData);
       if (response.data.success) {
@@ -50,7 +60,11 @@ function Home() {
         setTimeout(() => setSubmitStatus(null), 5000);
       }
     } catch (error) {
-      setSubmitStatus('error');
+      // Fallback to mailto if API fails
+      const mailtoLink = `mailto:info@prinstinegroup.org?subject=Contact Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(formData.email)}`;
+      window.location.href = mailtoLink;
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
