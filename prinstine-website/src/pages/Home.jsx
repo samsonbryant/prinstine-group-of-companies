@@ -8,6 +8,7 @@ import ceoPhoto from '../assets/CEO-profile image.jpeg';
 import officeImage from '../assets/office-address-image.jpeg';
 
 function Home() {
+  const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState(null);
 
@@ -42,7 +43,7 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/inquiries', formData);
+      const response = await axios.post(`${API_BASE}/api/inquiries`, formData);
       if (response.data.success) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });

@@ -4,6 +4,7 @@ import axios from 'axios';
 import $ from 'jquery';
 
 function CertificateVerification() {
+  const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [certNumber, setCertNumber] = useState('');
   const [verificationResult, setVerificationResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ function CertificateVerification() {
 
     setLoading(true);
     try {
-      const response = await axios.post('/api/verify-certificate', {
+      const response = await axios.post(`${API_BASE}/api/verify-certificate`, {
         cert_number: certNumber.trim()
       });
       setVerificationResult(response.data);

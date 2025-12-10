@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 
 function BankDetails() {
+  const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [bankDetails, setBankDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ function BankDetails() {
 
   const fetchBankDetails = async () => {
     try {
-      const response = await axios.get('/api/bank-details');
+      const response = await axios.get(`${API_BASE}/api/bank-details`);
       setBankDetails(response.data);
       setLoading(false);
     } catch (err) {

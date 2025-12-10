@@ -4,6 +4,7 @@ import axios from 'axios';
 const partnersHero = 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80';
 
 function Partners() {
+  const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState(null);
 
@@ -18,7 +19,7 @@ function Partners() {
     e.preventDefault();
     try {
       // Submit as inquiry
-      const response = await axios.post('/api/inquiries', {
+      const response = await axios.post(`${API_BASE}/api/inquiries`, {
         name: formData.name,
         email: formData.email,
         message: `Partnership Inquiry from ${formData.company}: ${formData.message}`
