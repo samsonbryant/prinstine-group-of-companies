@@ -1,0 +1,27 @@
+services:
+  # Backend API Service
+  - type: web
+    name: prinstine-backend
+    env: node
+    buildCommand: npm ci
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://prinstinegroup.org,https://www.prinstinegroup.org
+    healthCheckPath: /api/health
+
+  # Frontend Static Site
+  - type: static
+    name: prinstine-frontend
+    buildCommand: npm ci && npm run build
+    publishPath: prinstine-website/dist
+    rootDir: prinstine-website
+    envVars:
+      - key: VITE_API_BASE
+        sync: false  # You'll need to set this manually to your backend URL
+

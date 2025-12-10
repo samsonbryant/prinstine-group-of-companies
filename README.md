@@ -135,6 +135,24 @@ The backend runs with Node.js directly. For production, consider using PM2 or si
 - Responsive design works on all screen sizes
 - Animations are optimized for performance
 
+## Deployment
+
+This project is configured for deployment on Render.
+
+### Quick Deploy
+
+See **[RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)** for detailed step-by-step instructions.
+
+**Quick Summary:**
+1. Deploy **Backend** as a **Web Service** (Root: `backend`, Build: `npm ci`, Start: `npm start`)
+2. Deploy **Frontend** as a **Static Site** (Root: `prinstine-website`, Build: `npm ci && npm run build`, Publish: `prinstine-website/dist`)
+3. Set `VITE_API_BASE` environment variable in frontend to your backend URL
+4. Configure custom domain `prinstinegroup.org` in Render
+
+### Render Blueprint
+
+You can use the included `render.yaml` file for automated deployment, or configure manually using the guide above.
+
 ## License
 
 © 2025 Prinstine Group of Companies. All rights reserved.
