@@ -17,17 +17,24 @@ function BankDetails() {
     const fallbackDetails = [
       {
         id: 1,
-        account_name: 'Prinstine Group of Companies',
-        bank_name: 'EcoBank Liberia',
-        account_number: '0012345678901',
-        swift_code: 'ECOLLRLM'
+        account_name: 'Prinstine Group of Companies (USD)',
+        bank_name: 'EcoBank',
+        account_number: '6102243542',
+        swift_code: null
       },
       {
         id: 2,
-        account_name: 'Prinstine Academy',
-        bank_name: 'United Bank for Africa (UBA)',
-        account_number: '0023456789012',
-        swift_code: 'UNAFLRLM'
+        account_name: 'Prinstine Academy Inc. (USD)',
+        bank_name: 'EcoBank',
+        account_number: '6102243552',
+        swift_code: null
+      },
+      {
+        id: 3,
+        account_name: 'Prinstine Group of Companies Inc (USD)',
+        bank_name: 'Bloom Bank',
+        account_number: '00210306847013',
+        swift_code: null
       }
     ];
 
@@ -190,6 +197,56 @@ function BankDetails() {
                 </p>
               </div>
             )}
+
+            {/* Mobile Money Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12"
+            >
+              <h3 className="text-3xl font-heading font-bold mb-8 text-text dark:text-white text-center">
+                Mobile Money Details
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-3xl">📱</span>
+                    </div>
+                    <h4 className="text-2xl font-heading font-bold text-text dark:text-white">MTN Mobile Money</h4>
+                  </div>
+                  <div className="bg-neutral dark:bg-gray-700 p-6 rounded-xl">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 font-semibold">Merchant Number</p>
+                    <p className="text-2xl font-bold text-text dark:text-white font-mono">0887417954</p>
+                  </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-3xl">📱</span>
+                    </div>
+                    <h4 className="text-2xl font-heading font-bold text-text dark:text-white">Orange Money</h4>
+                  </div>
+                  <div className="bg-neutral dark:bg-gray-700 p-6 rounded-xl">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 font-semibold">Merchant Number</p>
+                    <p className="text-2xl font-bold text-text dark:text-white font-mono">8644338</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
 
             {/* Payment Inquiry Form */}
             <motion.div

@@ -13,6 +13,8 @@ function Partners() {
     { name: 'QuickBooks', logo: '📊', description: 'Software and training partner' },
     { name: 'EcoBank Liberia', logo: '🏦', description: 'Banking and financial services partner' },
     { name: 'UBA Liberia', logo: '🏦', description: 'Financial services partner' },
+    { name: 'Talent Management Solution', logo: '👥', description: 'Partner in Human Resource Management (Nigeria)' },
+    { name: 'Sov-Consults Liberia Limited', logo: '🔍', description: 'Partner in Audit & Advisory Services' },
   ];
 
   const handleSubmit = async (e) => {

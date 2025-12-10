@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 const servicesHero = 'https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=1600&q=80';
 
 function Services() {
+  const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [activeTab, setActiveTab] = useState('consults');
+  const [microfinanceForm, setMicrofinanceForm] = useState({
+    name: '', organization: '', email: '', address: '', gender: '', dateOfBirth: '', phone: '', amount: '', purpose: '', document: null
+  });
+  const [consultsForm, setConsultsForm] = useState({
+    name: '', contact: '', email: '', description: '', servicesNeeded: '', address: ''
+  });
+  const [submitStatus, setSubmitStatus] = useState({ microfinance: null, consults: null });
 
   const services = {
     consults: {
@@ -241,6 +250,142 @@ function Services() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Microfinance Form */}
+              {activeTab === 'microfinance' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-16 bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                >
+                  <h3 className="text-3xl font-heading font-bold mb-6 text-text dark:text-white text-center">
+                    Apply for Microfinance Loan
+                  </h3>
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+                    const mailtoLink = `mailto:info@prinstinegroup.org?subject=Microfinance Loan Application from ${encodeURIComponent(microfinanceForm.name)}&body=Name: ${encodeURIComponent(microfinanceForm.name)}%0D%0AOrganization: ${encodeURIComponent(microfinanceForm.organization)}%0D%0AEmail: ${encodeURIComponent(microfinanceForm.email)}%0D%0AAddress: ${encodeURIComponent(microfinanceForm.address)}%0D%0AGender: ${encodeURIComponent(microfinanceForm.gender)}%0D%0ADate of Birth: ${encodeURIComponent(microfinanceForm.dateOfBirth)}%0D%0APhone: ${encodeURIComponent(microfinanceForm.phone)}%0D%0AAmount: ${encodeURIComponent(microfinanceForm.amount)}%0D%0APurpose: ${encodeURIComponent(microfinanceForm.purpose)}`;
+                    window.location.href = mailtoLink;
+                    setSubmitStatus({ ...submitStatus, microfinance: 'success' });
+                    setMicrofinanceForm({ name: '', organization: '', email: '', address: '', gender: '', dateOfBirth: '', phone: '', amount: '', purpose: '', document: null });
+                    setTimeout(() => setSubmitStatus({ ...submitStatus, microfinance: null }), 5000);
+                  }} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Name *</label>
+                        <input type="text" required value={microfinanceForm.name} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, name: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Organization *</label>
+                        <input type="text" required value={microfinanceForm.organization} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, organization: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Email *</label>
+                        <input type="email" required value={microfinanceForm.email} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, email: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Phone *</label>
+                        <input type="tel" required value={microfinanceForm.phone} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Gender *</label>
+                        <select required value={microfinanceForm.gender} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, gender: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Date of Birth *</label>
+                        <input type="date" required value={microfinanceForm.dateOfBirth} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, dateOfBirth: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Address *</label>
+                      <textarea required value={microfinanceForm.address} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, address: e.target.value })} rows="3" className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary resize-none"></textarea>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Loan Amount (USD) *</label>
+                        <input type="number" required value={microfinanceForm.amount} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, amount: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="0.00" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Purpose of Loan *</label>
+                        <input type="text" required value={microfinanceForm.purpose} onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, purpose: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Upload Document</label>
+                      <input type="file" onChange={(e) => setMicrofinanceForm({ ...microfinanceForm, document: e.target.files[0] })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Accepted formats: PDF, DOC, DOCX, JPG, PNG (Max 5MB)</p>
+                    </div>
+                    <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all">
+                      Submit Application
+                    </motion.button>
+                    {submitStatus.microfinance === 'success' && (
+                      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-600 dark:text-green-400 text-center">
+                        Application submitted successfully! We'll contact you soon.
+                      </motion.p>
+                    )}
+                  </form>
+                </motion.div>
+              )}
+
+              {/* Consults Form */}
+              {activeTab === 'consults' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-16 bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                >
+                  <h3 className="text-3xl font-heading font-bold mb-6 text-text dark:text-white text-center">
+                    Request Consultation Services
+                  </h3>
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+                    const mailtoLink = `mailto:info@prinstinegroup.org?subject=Consultation Request from ${encodeURIComponent(consultsForm.name)}&body=Name: ${encodeURIComponent(consultsForm.name)}%0D%0AContact: ${encodeURIComponent(consultsForm.contact)}%0D%0AEmail: ${encodeURIComponent(consultsForm.email)}%0D%0AAddress: ${encodeURIComponent(consultsForm.address)}%0D%0AServices Needed: ${encodeURIComponent(consultsForm.servicesNeeded)}%0D%0ADescription: ${encodeURIComponent(consultsForm.description)}`;
+                    window.location.href = mailtoLink;
+                    setSubmitStatus({ ...submitStatus, consults: 'success' });
+                    setConsultsForm({ name: '', contact: '', email: '', description: '', servicesNeeded: '', address: '' });
+                    setTimeout(() => setSubmitStatus({ ...submitStatus, consults: null }), 5000);
+                  }} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Name *</label>
+                        <input type="text" required value={consultsForm.name} onChange={(e) => setConsultsForm({ ...consultsForm, name: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Contact Number *</label>
+                        <input type="tel" required value={consultsForm.contact} onChange={(e) => setConsultsForm({ ...consultsForm, contact: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Email *</label>
+                        <input type="email" required value={consultsForm.email} onChange={(e) => setConsultsForm({ ...consultsForm, email: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Services Needed *</label>
+                        <input type="text" required value={consultsForm.servicesNeeded} onChange={(e) => setConsultsForm({ ...consultsForm, servicesNeeded: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="e.g., Tax Planning, Audit Services" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Address *</label>
+                      <textarea required value={consultsForm.address} onChange={(e) => setConsultsForm({ ...consultsForm, address: e.target.value })} rows="3" className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary resize-none"></textarea>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-text dark:text-white">Description *</label>
+                      <textarea required value={consultsForm.description} onChange={(e) => setConsultsForm({ ...consultsForm, description: e.target.value })} rows="5" className="w-full px-4 py-3 rounded-xl bg-neutral dark:bg-gray-700 text-text dark:text-white focus:outline-none focus:ring-2 focus:ring-primary resize-none" placeholder="Please describe your consultation needs in detail..."></textarea>
+                    </div>
+                    <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all">
+                      Submit Request
+                    </motion.button>
+                    {submitStatus.consults === 'success' && (
+                      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-600 dark:text-green-400 text-center">
+                        Request submitted successfully! We'll contact you soon.
+                      </motion.p>
+                    )}
+                  </form>
+                </motion.div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
