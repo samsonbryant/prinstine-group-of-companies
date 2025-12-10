@@ -69,7 +69,7 @@ cd prinstine-website && npm install && npm run build
 
 And set:
 - **Root Directory**: Leave empty or set to `.` (repository root)
-- **Build Command**: `cd prinstine-website && npm install && npm run build`
+   - **Build Command**: `cd prinstine-website; npm install; npm run build`
 - **Publish Directory**: `prinstine-website/dist`
 
 ## Still Not Working?

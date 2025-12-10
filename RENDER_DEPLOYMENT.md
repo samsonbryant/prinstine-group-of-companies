@@ -20,7 +20,7 @@ This guide will help you deploy the Prinstine Group website as a **Static Site**
 4. Configure the service with these **exact** settings:
    - **Name**: `prinstine-frontend` (or any name you prefer)
    - **Root Directory**: `.` (repository root) or leave empty ⚠️ **Use this workaround**
-   - **Build Command**: `cd prinstine-website && npm install && npm run build` ⚠️ **Important: Use this exact command**
+   - **Build Command**: `cd prinstine-website; npm install; npm run build` ⚠️ **Important: Use semicolons instead of &&**
    - **Publish Directory**: `prinstine-website/dist` ⚠️ **Important: Full path from repo root**
 5. **Environment Variables**: Leave empty (none needed for static site)
 6. Click **"Create Static Site"**
@@ -106,7 +106,7 @@ This means Render is not finding your `package.json` file. **Check these setting
 ```
 Type: Static Site
 Root Directory: . (or leave empty)
-Build Command: cd prinstine-website && npm install && npm run build
+Build Command: cd prinstine-website; npm install; npm run build
 Publish Directory: prinstine-website/dist
 ```
 
