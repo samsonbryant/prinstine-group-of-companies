@@ -28,17 +28,17 @@ This guide will help you deploy the Prinstine Group website as a **Static Site**
 
 ## Configure Custom Domain
 
-1. In your **Static Site** settings, go to **"Custom Domains"**
-2. Click **"Add Custom Domain"**
-3. Enter: `prinstinegroup.org`
-4. Render will provide DNS records to add in Namecheap:
-   - **A Record** for `@` (apex domain) pointing to Render's IP addresses
-   - **CNAME Record** for `www` pointing to Render's provided hostname
-5. Add these records in Namecheap DNS settings:
-   - Go to Namecheap → Domain List → Manage → Advanced DNS
-   - Add the A records and CNAME as provided by Render
-6. Wait for DNS propagation (can take up to 48 hours, usually much faster)
-7. Once verified, enable **"Force HTTPS"** in Render
+See **[CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md)** for detailed step-by-step instructions.
+
+**Quick Summary:**
+1. In your **Static Site** settings → **"Custom Domains"** → **"Add Custom Domain"**
+2. Enter: `prinstinegroup.org`
+3. Render will provide DNS records - copy them exactly
+4. Add DNS records in Namecheap:
+   - **4 A Records** for `@` (apex domain) with Render's IP addresses
+   - **1 CNAME Record** for `www` with Render's hostname
+5. Wait for DNS verification in Render (usually 15-30 minutes)
+6. Enable **"Force HTTPS"** once verified
 
 ## Features
 
