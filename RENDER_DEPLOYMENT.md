@@ -20,8 +20,8 @@ This guide will help you deploy the Prinstine Group website as a **Static Site**
 4. Configure the service with these **exact** settings:
    - **Name**: `prinstine-frontend` (or any name you prefer)
    - **Root Directory**: `prinstine-website` ⚠️ **Important: Must be exactly this**
-   - **Build Command**: `npm ci && npm run build` ⚠️ **Important: Must be exactly this**
-   - **Publish Directory**: `prinstine-website/dist` ⚠️ **Important: Must be exactly this**
+   - **Build Command**: `npm install && npm run build` ⚠️ **Use this if npm ci fails**
+   - **Publish Directory**: `dist` ⚠️ **Important: Relative to root directory, so just `dist`**
 5. **Environment Variables**: Leave empty (none needed for static site)
 6. Click **"Create Static Site"**
 7. Wait for deployment to complete (usually 2-5 minutes)
