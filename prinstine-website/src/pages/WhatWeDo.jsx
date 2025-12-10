@@ -58,19 +58,19 @@ function WhatWeDo() {
 
   const testimonials = [
     {
-      quote: 'Prinstine Group has been instrumental in our business growth. Their consulting services are top-notch.',
-      author: 'John Doe',
-      position: 'CEO, ABC Company'
+      quote: 'PGC Service is Top-Notch, convenient and affordable. We are benefiting from their consultancy service.',
+      author: 'Platinum Entertainment Inc and Platinum Hotel',
+      position: 'Client'
     },
     {
-      quote: 'The training programs at Prinstine Academy have significantly enhanced our team\'s skills.',
-      author: 'Jane Smith',
-      position: 'HR Manager, XYZ Corporation'
+      quote: 'Our full Business set-up was done by PGC. Today we have full structure and financial system.',
+      author: 'ZTE',
+      position: 'Client'
     },
     {
-      quote: 'The microfinance services helped us expand our business. Highly recommended!',
-      author: 'Michael Johnson',
-      position: 'Small Business Owner'
+      quote: 'I can advise anyone at anytime to subscribe to PGC services. Our Taxes are paid on time and in full compliance because of PGC.',
+      author: 'RES-Q',
+      position: 'Client'
     }
   ];
 
