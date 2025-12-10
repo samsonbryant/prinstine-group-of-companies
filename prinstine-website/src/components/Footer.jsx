@@ -10,7 +10,7 @@ function Footer() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="bg-gradient-to-br from-text via-gray-900 to-text text-white mt-20 relative overflow-hidden"
+      className="bg-gradient-to-br from-primary via-blue-700 to-secondary text-white mt-20 relative overflow-hidden"
     >
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">

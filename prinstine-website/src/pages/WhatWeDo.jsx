@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import $ from 'jquery';
-const whatHero = 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80';
+import slide3 from '../assets/slide-3.jpeg';
 
 function WhatWeDo() {
   const [counters, setCounters] = useState({ years: 0, clients: 0, projects: 0 });
@@ -91,7 +91,7 @@ function WhatWeDo() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${whatHero})`,
+            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${slide3})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}

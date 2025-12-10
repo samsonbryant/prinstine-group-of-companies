@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
-const servicesHero = 'https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=1600&q=80';
+import slide2 from '../assets/Slide-2.jpeg';
 
 function Services() {
   const API_BASE = import.meta.env.VITE_API_BASE || '';
@@ -117,7 +117,7 @@ function Services() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${servicesHero})`,
+            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${slide2})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}

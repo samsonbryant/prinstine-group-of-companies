@@ -54,7 +54,7 @@ The placeholder page suggests Namecheap hosting is active. To fix:
 1. In Namecheap domain management, look for **"Hosting"** tab or section
 2. If you see any hosting plan active, **cancel/disable** it
 3. Or set it to **"Parked Domain"** and then disable parking
-
+    
 **Option B: Check for Redirects**
 1. Look for **"URL Redirect"** or **"Domain Redirect"** settings
 2. If any redirects are active, **remove them**

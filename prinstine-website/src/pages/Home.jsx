@@ -1,16 +1,56 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery';
-import heroBg from '../assets/background-image-homepage-below-header.jpeg';
+import slide1 from '../assets/Slide-1.jpeg';
+import slide2 from '../assets/Slide-2.jpeg';
+import slide3 from '../assets/slide-3.jpeg';
 import ceoPhoto from '../assets/CEO-profile image.jpeg';
 import officeImage from '../assets/office-address-image.jpeg';
+import jamesPhoto from '../assets/james-pgc.jpeg';
+import jamesettaPhoto from '../assets/jamesetta-pgc.jpeg';
 
 function Home() {
   const API_BASE = import.meta.env.VITE_API_BASE || '';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentLeaderSlide, setCurrentLeaderSlide] = useState(0);
+  
+  // Carousel images in order: slide-3, slide-1, slide-2
+  const slides = [slide3, slide1, slide2];
+  
+  // Leadership carousel: James and Jamesetta
+  const leadershipProfiles = [
+    {
+      name: 'James S. Tokpa',
+      title: 'Finance Manager',
+      subtitle: 'Lead Accounting software trainer',
+      bio: 'Mr. Tokpa is a professional Accountant with years of experience in accountancy and finance. His expertise and dedication continue to push PGC towards excellence.',
+      image: jamesPhoto
+    },
+    {
+      name: 'Jamesetta L. Sieh',
+      title: 'Marketing Manager / Lead Tax Analyst',
+      bio: 'Ms. Sieh is a professional in Accountancy, taxation and finance. She is Dedicated to ensuring that all PGC clients are well managed and coded. Her expertise in taxation has placed PGC in the best position of rendering an accurate tax consultancy service.',
+      image: jamesettaPhoto
+    }
+  ];
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(interval);
+  }, [slides.length]);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLeaderSlide((prev) => (prev + 1) % leadershipProfiles.length);
+    }, 6000); // Change leader slide every 6 seconds
+    return () => clearInterval(interval);
+  }, [leadershipProfiles.length]);
 
   const subsidiaries = [
     {
@@ -78,16 +118,28 @@ function Home() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background image with brand overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.45), rgba(30, 58, 138, 0.4)), url(${heroBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></div>
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Image Carousel */}
+        <div className="absolute inset-0">
+          {slides.map((slide, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: currentSlide === index ? 1 : 0,
+                scale: currentSlide === index ? 1 : 1.1
+              }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.45), rgba(30, 58, 138, 0.4)), url(${slide})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            />
+          ))}
+        </div>
+        
         {/* Animated gradient accent */}
         <div className="absolute inset-0 animated-gradient opacity-40 mix-blend-screen"></div>
         {/* Overlay pattern */}
@@ -127,71 +179,89 @@ function Home() {
           />
         </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 text-center relative z-10"
-        >
+        {/* Carousel Indicators */}
+        <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                currentSlide === index 
+                  ? 'bg-white w-8' 
+                  : 'bg-white/50 hover:bg-white/75'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        {/* Content below images */}
+        <div className="container mx-auto px-4 text-center relative z-10 mt-auto mb-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-            className="inline-block mb-6 px-6 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30"
-          >
-            <span className="text-white/90 text-sm font-semibold">Welcome to Excellence</span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 text-white leading-tight"
+            transition={{ duration: 0.8 }}
           >
-            Welcome to{' '}
-            <span className="bg-gradient-to-r from-accent via-yellow-300 to-accent bg-clip-text text-transparent">
-              Prinstine Group
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-xl md:text-2xl lg:text-3xl mb-10 text-white/90 max-w-3xl mx-auto font-light"
-          >
-            Empower, Educate, Elevate
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToAbout}
-              className="px-10 py-4 bg-gradient-to-r from-accent to-yellow-500 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-glow-lg transition-all"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+              className="inline-block mb-6 px-6 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30"
             >
-              Learn More
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all"
+              <span className="text-white/90 text-sm font-semibold">Welcome to Excellence</span>
+            </motion.div>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 text-white leading-tight"
             >
-              Our Services
-            </motion.button>
+              Welcome to{' '}
+              <span className="bg-gradient-to-r from-accent via-yellow-300 to-accent bg-clip-text text-transparent">
+                Prinstine Group
+              </span>
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-xl md:text-2xl lg:text-3xl mb-10 text-white/90 max-w-3xl mx-auto font-light"
+            >
+              Empower, Educate, Elevate
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToAbout}
+                className="px-10 py-4 bg-gradient-to-r from-accent to-yellow-500 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-glow-lg transition-all"
+              >
+                Learn More
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all"
+              >
+                Our Services
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
         
         {/* Scroll indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
         >
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
             <motion.div
@@ -332,7 +402,7 @@ function Home() {
                   <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
                     <h5 className="font-semibold mb-4 text-lg">Qualifications:</h5>
                     <ul className="space-y-3">
-                      {['B.Sc. in Accounting', 'MBA in Business Administration', 'MA in Education', 'PGDE (Post Graduate Diploma in Education)', 'Dip-Re (Diploma in Religious Education)'].map((qual, i) => (
+                      {['B.Sc. in Accounting', 'MBA in Finance', 'MA in Education', 'PGDE (Post Graduate Diploma in Education)', 'DIP-Re (Diploma in Reinsurance)'].map((qual, i) => (
                         <motion.li
                           key={i}
                           initial={{ opacity: 0, x: -20 }}
@@ -348,6 +418,72 @@ function Home() {
                     </ul>
                   </div>
                 </div>
+              </div>
+            </div>
+            
+            {/* Leadership Carousel - James and Jamesetta */}
+            <div className="mt-12 relative">
+              <div className="relative overflow-hidden rounded-3xl min-h-[300px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentLeaderSlide}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                  >
+                    <div className="bg-white/10 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-white/20">
+                      <div className="flex flex-col md:flex-row items-center gap-10">
+                        <motion.div
+                          whileHover={{ scale: 1.03, rotate: 1 }}
+                          className="relative"
+                        >
+                          <div className="w-56 h-56 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/40 bg-white">
+                            <img
+                              src={leadershipProfiles[currentLeaderSlide].image}
+                              alt={leadershipProfiles[currentLeaderSlide].name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="absolute -bottom-2 -right-4 w-24 h-24 bg-secondary rounded-full blur-2xl opacity-50"></div>
+                        </motion.div>
+                        
+                        <div className="flex-1">
+                          <h3 className="text-3xl md:text-4xl font-heading font-bold mb-2">
+                            {leadershipProfiles[currentLeaderSlide].name}
+                          </h3>
+                          <h4 className="text-xl md:text-2xl font-semibold mb-6 text-accent">
+                            {leadershipProfiles[currentLeaderSlide].title}
+                          </h4>
+                          {leadershipProfiles[currentLeaderSlide].subtitle && (
+                            <p className="text-lg text-white/80 mb-4">
+                              {leadershipProfiles[currentLeaderSlide].subtitle}
+                            </p>
+                          )}
+                          <p className="text-lg text-white/90 leading-relaxed">
+                            {leadershipProfiles[currentLeaderSlide].bio}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              
+              {/* Carousel Indicators */}
+              <div className="flex justify-center gap-3 mt-6">
+                {leadershipProfiles.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentLeaderSlide(index)}
+                    className={`h-2 rounded-full transition-all ${
+                      currentLeaderSlide === index 
+                        ? 'bg-white w-8' 
+                        : 'bg-white/50 w-2 hover:bg-white/75'
+                    }`}
+                    aria-label={`Go to ${leadershipProfiles[index].name}`}
+                  />
+                ))}
               </div>
             </div>
           </motion.div>
