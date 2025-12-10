@@ -83,8 +83,8 @@ The static site includes:
 ```
 Type: Static Site
 Root Directory: prinstine-website
-Build Command: npm ci && npm run build
-Publish Directory: prinstine-website/dist
+Build Command: npm install && npm run build
+Publish Directory: dist
 ```
 
 ### DNS Records (Namecheap)
