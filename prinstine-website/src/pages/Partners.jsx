@@ -10,9 +10,6 @@ function Partners() {
 
   const partners = [
     { name: 'Ministry of Education', logo: '🏛️', description: 'Licensing and accreditation partner' },
-    { name: 'QuickBooks', logo: '📊', description: 'Software and training partner' },
-    { name: 'EcoBank Liberia', logo: '🏦', description: 'Banking and financial services partner' },
-    { name: 'UBA Liberia', logo: '🏦', description: 'Financial services partner' },
     { name: 'Talent Management Solution', logo: '👥', description: 'Partner in Human Resource Management (Nigeria)' },
     { name: 'Sov-Consults Liberia Limited', logo: '🔍', description: 'Partner in Audit & Advisory Services' },
   ];
@@ -58,7 +55,7 @@ function Partners() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.82), rgba(30,58,138,0.78)), url(${partnersHero})`,
+            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${partnersHero})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}

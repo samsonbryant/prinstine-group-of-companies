@@ -91,7 +91,7 @@ function WhatWeDo() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.82), rgba(30,58,138,0.78)), url(${whatHero})`,
+            backgroundImage: `linear-gradient(120deg, rgba(17,24,39,0.45), rgba(30,58,138,0.4)), url(${whatHero})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}

@@ -83,7 +83,7 @@ function Home() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.75), rgba(30, 58, 138, 0.7)), url(${heroBg})`,
+            backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.45), rgba(30, 58, 138, 0.4)), url(${heroBg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -160,7 +160,7 @@ function Home() {
             transition={{ delay: 0.5 }}
             className="text-xl md:text-2xl lg:text-3xl mb-10 text-white/90 max-w-3xl mx-auto font-light"
           >
-            Driving Growth, Empowerment, and Productivity
+            Empower, Educate, Elevate
           </motion.p>
           
           <motion.div
@@ -420,7 +420,7 @@ function Home() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(140deg, rgba(17, 24, 39, 0.8), rgba(30, 58, 138, 0.75)), url(${officeImage})`,
+            backgroundImage: `linear-gradient(140deg, rgba(17, 24, 39, 0.45), rgba(30, 58, 138, 0.4)), url(${officeImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
