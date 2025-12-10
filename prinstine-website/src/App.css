@@ -1,0 +1,20 @@
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Utility wrappers */
+.page-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.05), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.08), transparent 30%),
+    #f3f4f6;
+}
+
+.page-shell.dark {
+  background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.06), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.08), transparent 30%),
+    #0f172a;
+}
