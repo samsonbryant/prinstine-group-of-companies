@@ -61,10 +61,33 @@ The static site includes:
 
 ## Troubleshooting
 
-### Build Fails
-- Ensure Root Directory is set to: `prinstine-website`
-- Check that Build Command is exactly: `npm ci && npm run build`
-- Verify Publish Directory is: `prinstine-website/dist`
+### Error: "Could not read package.json" or "ENOENT: no such file or directory"
+
+This means Render is not finding your `package.json` file. **Check these settings:**
+
+1. **Verify Root Directory**:
+   - Go to your Static Site → Settings
+   - Scroll to "Build & Deploy"
+   - **Root Directory** must be exactly: `prinstine-website`
+   - ⚠️ **Case-sensitive** - must be lowercase with hyphen
+   - ⚠️ **No leading slash** - just `prinstine-website` not `/prinstine-website`
+
+2. **Verify Build Command**:
+   - Should be: `npm install && npm run build`
+   - Make sure there are no extra spaces
+
+3. **Verify Publish Directory**:
+   - Should be: `dist` (not `prinstine-website/dist`)
+
+4. **If still failing, try this**:
+   - Delete the Static Site service
+   - Create a new one from scratch
+   - Double-check Root Directory is `prinstine-website` before clicking "Create"
+
+### Build Fails with npm errors
+- Ensure Root Directory is set to: `prinstine-website` (exactly, case-sensitive)
+- Check that Build Command is exactly: `npm install && npm run build`
+- Verify Publish Directory is: `dist` (relative to root directory)
 
 ### Domain Not Working
 - Verify DNS records are correctly set in Namecheap
