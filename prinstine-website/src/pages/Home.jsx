@@ -117,8 +117,8 @@ function Home() {
 
   return (
     <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Hero Section - Image Carousel */}
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
         {/* Image Carousel */}
         <div className="absolute inset-0">
           {slides.map((slide, index) => (
@@ -132,7 +132,7 @@ function Home() {
               transition={{ duration: 1, ease: "easeInOut" }}
               className="absolute inset-0"
               style={{
-                backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.45), rgba(30, 58, 138, 0.4)), url(${slide})`,
+                backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.15), rgba(30, 58, 138, 0.12)), url(${slide})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
               }}
@@ -140,44 +140,8 @@ function Home() {
           ))}
         </div>
         
-        {/* Animated gradient accent */}
-        <div className="absolute inset-0 animated-gradient opacity-40 mix-blend-screen"></div>
-        {/* Overlay pattern */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0)',
-          backgroundSize: '60px 60px',
-          opacity: 0.15
-        }}></div>
-        
-        {/* Floating shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-              rotate: [0, 10, 0]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              y: [0, 30, 0],
-              x: [0, -20, 0],
-              rotate: [0, -10, 0]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl"
-          />
-        </div>
+        {/* Light overlay for better image visibility */}
+        <div className="absolute inset-0 bg-black/10"></div>
         
         {/* Carousel Indicators */}
         <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
@@ -187,24 +151,28 @@ function Home() {
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-all ${
                 currentSlide === index 
-                  ? 'bg-white w-8' 
-                  : 'bg-white/50 hover:bg-white/75'
+                  ? 'bg-white w-8 shadow-lg' 
+                  : 'bg-white/60 hover:bg-white/80'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
-        
-        {/* Content below images */}
-        <div className="container mx-auto px-4 text-center relative z-10 mt-auto mb-20">
+      </section>
+
+      {/* Welcome Section - Below Images */}
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-blue-700 to-secondary text-white">
+        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
               className="inline-block mb-6 px-6 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30"
             >
@@ -213,7 +181,8 @@ function Home() {
             
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 text-white leading-tight"
             >
@@ -225,7 +194,8 @@ function Home() {
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.5 }}
               className="text-xl md:text-2xl lg:text-3xl mb-10 text-white/90 max-w-3xl mx-auto font-light"
             >
@@ -234,7 +204,8 @@ function Home() {
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.7 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
@@ -256,21 +227,6 @@ function Home() {
             </motion.div>
           </motion.div>
         </div>
-        
-        {/* Scroll indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-white rounded-full mt-2"
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* Subsidiaries Section */}
