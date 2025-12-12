@@ -25,7 +25,7 @@ function Services() {
           icon: '📋'
         },
         {
-          title: 'Business Consulting',
+          title: 'Business Consultation',
           description: 'Strategic business advice to help your organization grow and succeed.',
           icon: '💼'
         },
