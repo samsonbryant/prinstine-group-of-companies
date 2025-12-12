@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,13 +18,29 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Initialize SQLite database
-const dbPath = path.join(__dirname, 'prinstine.db');
+// Initialize SQLite database with persistent storage
+// On Render, use persistent disk path if available, otherwise use current directory
+// Render persistent disk is mounted at /opt/render/project/persistent
+const persistentDiskPath = process.env.RENDER_PERSISTENT_DISK_PATH || '/opt/render/project/persistent';
+const dbDirectory = process.env.NODE_ENV === 'production' && require('fs').existsSync(persistentDiskPath)
+  ? persistentDiskPath
+  : __dirname;
+
+// Ensure directory exists
+if (!fs.existsSync(dbDirectory)) {
+  fs.mkdirSync(dbDirectory, { recursive: true });
+}
+
+const dbPath = path.join(dbDirectory, 'prinstine.db');
+console.log(`📁 Database path: ${dbPath}`);
+
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('Error opening database:', err.message);
+    console.error('❌ Error opening database:', err.message);
+    console.error('Database path attempted:', dbPath);
   } else {
     console.log('✅ Connected to SQLite database');
+    console.log(`💾 Database location: ${dbPath}`);
     initializeDatabase();
   }
 });
@@ -236,13 +253,30 @@ app.listen(PORT, () => {
 });
 
 // Graceful shutdown
-process.on('SIGINT', () => {
+const gracefulShutdown = (signal) => {
+  console.log(`\n${signal} received. Closing database connection...`);
   db.close((err) => {
     if (err) {
-      console.error(err.message);
+      console.error('❌ Error closing database:', err.message);
+      process.exit(1);
+    } else {
+      console.log('✅ Database connection closed gracefully.');
+      process.exit(0);
     }
-    console.log('Database connection closed.');
-    process.exit(0);
   });
+};
+
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+
+// Handle uncaught errors
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+  gracefulShutdown('uncaughtException');
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  gracefulShutdown('unhandledRejection');
 });
 
