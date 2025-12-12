@@ -134,10 +134,9 @@ function Home() {
               className="absolute inset-0"
               style={{
                 backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.15), rgba(30, 58, 138, 0.12)), url(${slide})`,
-                backgroundSize: slide === slide4 ? 'cover' : 'cover',
-                backgroundPosition: slide === slide4 ? 'top' : 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundColor: slide === slide4 ? '#0b1a3a' : undefined
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
               }}
             />
           ))}
