@@ -6,6 +6,7 @@ import $ from 'jquery';
 import slide1 from '../assets/Slide-1.jpeg';
 import slide2 from '../assets/Slide-2.jpeg';
 import slide3 from '../assets/slide-3.jpeg';
+import slide4 from '../assets/slide-4.jpeg';
 import ceoPhoto from '../assets/CEO-profile image.jpeg';
 import officeImage from '../assets/office-address-image.jpeg';
 import jamesPhoto from '../assets/james-pgc.jpeg';
@@ -18,8 +19,8 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentLeaderSlide, setCurrentLeaderSlide] = useState(0);
   
-  // Carousel images in order: slide-3, slide-1, slide-2
-  const slides = [slide3, slide1, slide2];
+  // Carousel images in order: slide-3, slide-1, slide-2, slide-4
+  const slides = [slide3, slide1, slide2, slide4];
   
   // Leadership carousel: James and Jamesetta
   const leadershipProfiles = [
