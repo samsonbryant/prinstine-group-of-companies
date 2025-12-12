@@ -135,7 +135,7 @@ function Home() {
               style={{
                 backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.15), rgba(30, 58, 138, 0.12)), url(${slide})`,
                 backgroundSize: slide === slide4 ? 'contain' : 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: slide === slide4 ? 'top center' : 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundColor: slide === slide4 ? '#0b1a3a' : undefined
               }}
