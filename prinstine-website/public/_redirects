@@ -1,4 +1,7 @@
 # SPA Routing - Redirect all routes to index.html
 # This fixes 404 errors when users refresh the page or navigate directly to routes
+# For Netlify
 /*    /index.html   200
+
+# For Vercel and other platforms, use vercel.json or server configuration
 

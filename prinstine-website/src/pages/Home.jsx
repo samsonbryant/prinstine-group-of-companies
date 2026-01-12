@@ -11,6 +11,12 @@ import ceoPhoto from '../assets/CEO-profile image.jpeg';
 import officeImage from '../assets/office-address-image.jpeg';
 import jamesPhoto from '../assets/james-pgc.jpeg';
 import jamesettaPhoto from '../assets/jamesetta-pgc.jpeg';
+import yolainPhoto from '../assets/Yolain_Kate_Waka_Metzger.jpeg';
+import amyPhoto from '../assets/Amy_N_Stewart.jpeg';
+import lavelaPhoto from '../assets/Cllr_Lavela_B_Walker.jpeg';
+import vayePhoto from '../assets/Dr_Vaye_N_Collins.jpeg';
+import jacksonPhoto from '../assets/Dr_Jackson_G_Weah.jpeg';
+import edmondPhoto from '../assets/Edmond_K._Bennicks.jpeg';
 
 function Home() {
   const API_BASE = import.meta.env.VITE_API_BASE || '';
@@ -22,6 +28,46 @@ function Home() {
   // Carousel images in order: slide-3, slide-1, slide-2, slide-4
   const slides = [slide3, slide1, slide2, slide4];
   
+  // Board of Directors
+  const boardMembers = [
+    {
+      name: 'Mrs. Yolain Kate Waka-Metzger',
+      title: 'Board Chair',
+      bio: 'Yolain Kate Waka-Metzger, the Board Chair, is a distinguished health practitioner with extensive experience across clinical practice, academia, and social work. She has made significant contributions to health education, community development, and social impact initiatives, combining professional expertise with a strong commitment to public service. Her leadership reflects a deep understanding of healthcare systems and a passion for advancing equitable, community-focused solutions through strategic governance.',
+      image: yolainPhoto
+    },
+    {
+      name: 'Ms. Amy N. Stewart',
+      title: 'Board Secretary/ Head of Finance',
+      bio: 'Amy N. Stewart is an accomplished professional in banking and finance, with over 15 years of experience in the financial services sector. Her career as a banker spans a broad range of roles, providing deep expertise in financial management, risk assessment, and customer-focused financial solutions. She currently serves as a financial consultant, where she advises individuals and organizations on strategic financial planning, investment decisions, and sustainable financial practices.',
+      image: amyPhoto
+    },
+    {
+      name: 'Cllr. Lavela B. Walker',
+      title: 'Head of Legal Engagements',
+      bio: 'Cllr. Lavela B. Walker is a seasoned legal practitioner and Counselor-at-Law in the Republic of Liberia, with over 20 years of distinguished experience in legal practice. His career reflects deep expertise in legal advisory services, governance, and advocacy, with a strong record of providing strategic counsel on complex legal and regulatory matters. He brings to the Board a wealth of knowledge, sound judgment, and a commitment to ethical leadership and the rule of law.',
+      image: lavelaPhoto
+    },
+    {
+      name: 'Dr. Collins N. Vaye',
+      title: 'Head of Academic Affairs',
+      bio: 'Dr. Vaye N. Collins brings over 15 years of experience in engineering and computing education, with a distinguished career in academia. He has served as a lecturer at universities within Liberia and internationally, where he has contributed to curriculum development, academic leadership, and the training of future professionals in engineering and computing disciplines. His work reflects a strong commitment to academic excellence, research, and the advancement of technical education.',
+      image: vayePhoto
+    },
+    {
+      name: 'Dr. Jackson G. Weah',
+      title: 'Head of Human Resource Management',
+      bio: 'Bishop Dr. Jackson G. Weah is the Founder of Hope Renewal Ministries Liberia and the Founder of the Bridge of Hope Girls School in Liberia. He serves as the Resident Bishop of Hope Renewal Ministries, providing spiritual leadership and organizational oversight. In addition to his pastoral work, he is an academic contributor who lectures at universities across Liberia, reflecting his strong commitment to education, leadership development, and social transformation.',
+      image: jacksonPhoto
+    },
+    {
+      name: 'Mr. Edmond K. Benicks',
+      title: 'Head of ICT Engagements',
+      bio: 'Edmond K. Benicks brings extensive experience in ICT management and software development, with a strong track record of leading technology initiatives, overseeing complex IT systems, and delivering scalable digital solutions. His expertise spans strategic ICT planning, systems integration, and the management of cross-functional technical teams, enabling organizations to improve operational efficiency and innovation through technology.',
+      image: edmondPhoto
+    }
+  ];
+
   // Leadership carousel: James and Jamesetta
   const leadershipProfiles = [
     {
@@ -294,6 +340,72 @@ function Home() {
                       </svg>
                     </span>
                   </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Board of Directors */}
+      <section className="py-24 bg-gradient-to-b from-white to-neutral dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4">
+              Governance
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-text dark:text-white">
+              Board of Directors
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Experienced leaders guiding our strategic vision
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {boardMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 overflow-hidden"
+              >
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                {/* Image container */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative z-10 w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6"
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </motion.div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-xl font-heading font-bold mb-2 text-text dark:text-white group-hover:text-primary dark:group-hover:text-accent transition-colors">
+                    {member.name}
+                  </h3>
+                  <h4 className="text-lg font-semibold mb-4 text-primary dark:text-accent">
+                    {member.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {member.bio}
+                  </p>
                 </div>
               </motion.div>
             ))}

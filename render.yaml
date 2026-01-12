@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: prinstine-frontend
+    env: node
+    rootDir: prinstine-website
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    # PORT is automatically set by Render, no need to specify
+
