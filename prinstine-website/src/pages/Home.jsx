@@ -392,7 +392,11 @@ function Home() {
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover"
-                    style={{ objectPosition: 'center center', objectFit: 'cover' }}
+                    style={{
+                      objectPosition: 'center center',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </motion.div>
