@@ -317,6 +317,19 @@ function About() {
             </p>
           </motion.div>
           
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12"
+          >
+            <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-primary/20">
+              <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">
+                Be it known that while there are 6 board members of Prinstine Group, The Board Chair/presiding has the Casting Vote: The Chair, as a member vote, and if there's a tie, they cast an additional vote (the casting vote) to break it, as per bylaws.
+              </p>
+            </div>
+          </motion.div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {boardMembers.map((member, index) => (
               <motion.div
