@@ -16,7 +16,7 @@ import amyPhoto from '../assets/Amy_N_Stewart.jpeg';
 import lavelaPhoto from '../assets/Cllr_Lavela_B_Walker.jpeg';
 import vayePhoto from '../assets/Dr_Vaye_N_Collins.jpeg';
 import jacksonPhoto from '../assets/Dr_Jackson_G_Weah.jpeg';
-import edmondPhoto from '../assets/Edmond_K._Bennicks.jpeg';
+// import edmondPhoto from '../assets/Edmond_K._Bennicks.jpeg';
 
 function Home() {
   const API_BASE = import.meta.env.VITE_API_BASE || '';
@@ -60,12 +60,12 @@ function Home() {
       bio: 'Bishop Dr. Jackson G. Weah is the Founder of Hope Renewal Ministries Liberia and the Founder of the Bridge of Hope Girls School in Liberia. He serves as the Resident Bishop of Hope Renewal Ministries, providing spiritual leadership and organizational oversight. In addition to his pastoral work, he is an academic contributor who lectures at universities across Liberia, reflecting his strong commitment to education, leadership development, and social transformation.',
       image: jacksonPhoto
     },
-    {
-      name: 'Mr. Edmond K. Benicks',
-      title: 'Head of ICT Engagements',
-      bio: 'Edmond K. Benicks brings extensive experience in ICT management and software development, with a strong track record of leading technology initiatives, overseeing complex IT systems, and delivering scalable digital solutions. His expertise spans strategic ICT planning, systems integration, and the management of cross-functional technical teams, enabling organizations to improve operational efficiency and innovation through technology.',
-      image: edmondPhoto
-    }
+    // {
+    //   name: 'Mr. Edmond K. Benicks',
+    //   title: 'Head of ICT Engagements',
+    //   bio: 'Edmond K. Benicks brings extensive experience in ICT management and software development, with a strong track record of leading technology initiatives, overseeing complex IT systems, and delivering scalable digital solutions. His expertise spans strategic ICT planning, systems integration, and the management of cross-functional technical teams, enabling organizations to improve operational efficiency and innovation through technology.',
+    //   image: edmondPhoto
+    // }
   ];
 
   // Leadership carousel: James and Jamesetta
