@@ -26,12 +26,12 @@ function Home() {
   const [currentLeaderSlide, setCurrentLeaderSlide] = useState(0);
   
   // Carousel images in order: slide-3, slide-1, slide-2, slide-4
-  // Per-slide options: position for fit/header visibility; slide-1 and slide-3 use top so header shows clearly
+  // slide-1 & slide-3: contain so full image shows clearly and header isn't cropped; others: cover
   const slideConfig = [
-    { src: slide3, position: 'center top', size: 'cover' },  // slide-3: favor top so content shows
-    { src: slide1, position: 'center top', size: 'cover' },    // slide-1: favor top so header shows
-    { src: slide2, position: 'center center', size: 'cover' },
-    { src: slide4, position: 'center center', size: 'cover' },
+    { src: slide3, position: 'center center', objectFit: 'contain' },
+    { src: slide1, position: 'center center', objectFit: 'contain' },
+    { src: slide2, position: 'center center', objectFit: 'cover' },
+    { src: slide4, position: 'center center', objectFit: 'cover' },
   ];
   const slides = slideConfig;
   
@@ -172,31 +172,42 @@ function Home() {
   return (
     <div className="pt-20">
       {/* Hero Section - Image Carousel */}
-      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Image Carousel */}
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-gray-900">
+        {/* Image Carousel - use img + object-fit for reliable display of slide-1 & slide-3 */}
         <div className="absolute inset-0">
           {slides.map((slide, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0 }}
-              animate={{ 
+              animate={{
                 opacity: currentSlide === index ? 1 : 0,
-                scale: currentSlide === index ? 1 : 1.05
+                scale: currentSlide === index ? 1 : 1.02
               }}
-              transition={{ duration: 1, ease: "easeInOut" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               className="absolute inset-0"
-              style={{
-                backgroundImage: `linear-gradient(180deg, rgba(17, 24, 39, 0.25) 0%, rgba(17, 24, 39, 0.08) 25%, transparent 50%, rgba(30, 58, 138, 0.12) 100%), url(${slide.src})`,
-                backgroundSize: slide.size || 'cover',
-                backgroundPosition: slide.position || 'center center',
-                backgroundRepeat: 'no-repeat'
-              }}
-            />
+            >
+              <img
+                src={slide.src}
+                alt=""
+                className="w-full h-full"
+                style={{
+                  objectFit: slide.objectFit || 'cover',
+                  objectPosition: slide.position || 'center center'
+                }}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </motion.div>
           ))}
         </div>
-        
-        {/* Light overlay; stronger at top so fixed header stays readable over slide-1/slide-3 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10 pointer-events-none" aria-hidden="true"></div>
+        {/* Gradient overlay: darker at top so fixed header is readable, light elsewhere so images show clearly */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(180deg, rgba(17,24,39,0.4) 0%, rgba(17,24,39,0.15) 15%, transparent 40%, transparent 70%, rgba(30,58,138,0.1) 100%)'
+          }}
+          aria-hidden="true"
+        />
         
         {/* Carousel Indicators */}
         <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
