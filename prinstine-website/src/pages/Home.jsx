@@ -26,7 +26,14 @@ function Home() {
   const [currentLeaderSlide, setCurrentLeaderSlide] = useState(0);
   
   // Carousel images in order: slide-3, slide-1, slide-2, slide-4
-  const slides = [slide3, slide1, slide2, slide4];
+  // Per-slide options: position for fit/header visibility; slide-1 and slide-3 use top so header shows clearly
+  const slideConfig = [
+    { src: slide3, position: 'center top', size: 'cover' },  // slide-3: favor top so content shows
+    { src: slide1, position: 'center top', size: 'cover' },    // slide-1: favor top so header shows
+    { src: slide2, position: 'center center', size: 'cover' },
+    { src: slide4, position: 'center center', size: 'cover' },
+  ];
+  const slides = slideConfig;
   
   // Board of Directors
   const boardMembers = [
@@ -174,22 +181,22 @@ function Home() {
               initial={{ opacity: 0 }}
               animate={{ 
                 opacity: currentSlide === index ? 1 : 0,
-                scale: currentSlide === index ? 1 : 1.1
+                scale: currentSlide === index ? 1 : 1.05
               }}
               transition={{ duration: 1, ease: "easeInOut" }}
               className="absolute inset-0"
               style={{
-                backgroundImage: `linear-gradient(120deg, rgba(17, 24, 39, 0.15), rgba(30, 58, 138, 0.12)), url(${slide})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundImage: `linear-gradient(180deg, rgba(17, 24, 39, 0.25) 0%, rgba(17, 24, 39, 0.08) 25%, transparent 50%, rgba(30, 58, 138, 0.12) 100%), url(${slide.src})`,
+                backgroundSize: slide.size || 'cover',
+                backgroundPosition: slide.position || 'center center',
                 backgroundRepeat: 'no-repeat'
               }}
             />
           ))}
         </div>
         
-        {/* Light overlay for better image visibility */}
-        <div className="absolute inset-0 bg-black/10"></div>
+        {/* Light overlay; stronger at top so fixed header stays readable over slide-1/slide-3 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10 pointer-events-none" aria-hidden="true"></div>
         
         {/* Carousel Indicators */}
         <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20 flex flex-col gap-3">
