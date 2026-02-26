@@ -16,7 +16,7 @@ import amyPhoto from '../assets/Amy_N_Stewart.jpeg';
 import lavelaPhoto from '../assets/Cllr_Lavela_B_Walker.jpeg';
 import vayePhoto from '../assets/Dr_Vaye_N_Collins.jpeg';
 import jacksonPhoto from '../assets/Dr_Jackson_G_Weah.jpeg';
-// import edmondPhoto from '../assets/Edmond_K._Bennicks.jpeg';
+import edmondPhoto from '../assets/Edmond_K._Bennicks.jpeg';
 
 function Home() {
   const API_BASE = import.meta.env.VITE_API_BASE || '';
@@ -26,7 +26,7 @@ function Home() {
   const [currentLeaderSlide, setCurrentLeaderSlide] = useState(0);
   
   // Carousel images in order: slide-3, slide-1, slide-2, slide-4
-  // slide-1 & slide-3: contain so full image shows clearly and header isn't cropped; others: cover
+  // slide-3 (new image): contain + center so it fits properly; slide-1: contain; others: cover
   const slideConfig = [
     { src: slide3, position: 'center center', objectFit: 'contain' },
     { src: slide1, position: 'center center', objectFit: 'contain' },
@@ -67,12 +67,12 @@ function Home() {
       bio: 'Bishop Dr. Jackson G. Weah is the Founder of Hope Renewal Ministries Liberia and the Founder of the Bridge of Hope Girls School in Liberia. He serves as the Resident Bishop of Hope Renewal Ministries, providing spiritual leadership and organizational oversight. In addition to his pastoral work, he is an academic contributor who lectures at universities across Liberia, reflecting his strong commitment to education, leadership development, and social transformation.',
       image: jacksonPhoto
     },
-    // {
-    //   name: 'Mr. Edmond K. Benicks',
-    //   title: 'Head of ICT Engagements',
-    //   bio: 'Edmond K. Benicks brings extensive experience in ICT management and software development, with a strong track record of leading technology initiatives, overseeing complex IT systems, and delivering scalable digital solutions. His expertise spans strategic ICT planning, systems integration, and the management of cross-functional technical teams, enabling organizations to improve operational efficiency and innovation through technology.',
-    //   image: edmondPhoto
-    // }
+    {
+      name: 'Mr. Edmond K. Benicks',
+      title: 'Head of ICT Engagements',
+      bio: 'Edmond K. Benicks brings extensive experience in ICT management and software development, with a strong track record of leading technology initiatives, overseeing complex IT systems, and delivering scalable digital solutions. His expertise spans strategic ICT planning, systems integration, and the management of cross-functional technical teams, enabling organizations to improve operational efficiency and innovation through technology.',
+      image: edmondPhoto
+    }
   ];
 
   // Leadership carousel: James and Jamesetta
